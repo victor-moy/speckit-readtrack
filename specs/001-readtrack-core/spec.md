@@ -164,6 +164,12 @@ isoladamente e validando os resultados contra os dados esperados.
 - **FR-015**: O sistema DEVE preservar os dados existentes entre execuções
   (persistência), permitindo que o usuário encerre e reabra a aplicação sem perda
   de informação.
+- **FR-016**: O sistema DEVE permitir exportar toda a coleção para um arquivo JSON
+  legível por humanos, contendo todos os campos de cada livro, para que o usuário
+  nunca fique preso ao formato interno de armazenamento.
+- **FR-017**: O sistema DEVE permitir restaurar uma coleção a partir de um arquivo
+  previamente exportado (backup/restore), preservando identificadores, status,
+  datas, notas e avaliações.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -194,6 +200,9 @@ isoladamente e validando os resultados contra os dados esperados.
   testados, incluindo o caso de coleção sem nenhuma avaliação.
 - **SC-006**: Após encerrar e reabrir a aplicação, 100% dos livros e seus dados
   (status, notas, avaliações) cadastrados anteriormente continuam disponíveis.
+- **SC-007**: Um usuário consegue exportar a coleção inteira e restaurá-la em uma
+  instalação nova do ReadTrack sem perda de nenhum dado (título, autor, status,
+  datas, nota e nota pessoal).
 
 ## Assumptions
 
@@ -207,7 +216,6 @@ isoladamente e validando os resultados contra os dados esperados.
   legível (não é necessário expor UUIDs longos na interação cotidiana), desde que
   sejam estáveis e únicos por livro.
 - Não há requisito de importação de catálogos externos (ex.: ISBN, APIs de livros)
-  nesta fase; o cadastro é manual.
-- Backup/exportação de dados é desejável a longo prazo, mas não é um requisito
-  bloqueante desta primeira versão (registrado aqui como possível trabalho futuro,
-  fora do escopo de FR atuais).
+  nesta fase; o cadastro é manual. O requisito de import/export (FR-016, FR-017)
+  cobre apenas backup/restore do próprio formato do ReadTrack, não integração com
+  catálogos de terceiros.
