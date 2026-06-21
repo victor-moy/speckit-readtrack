@@ -114,6 +114,35 @@ isoladamente e validando os resultados contra os dados esperados.
 
 ---
 
+### User Story 5 - Backup e restauração de dados (Priority: P5)
+
+Como leitor, quero exportar minha coleção inteira para um arquivo e poder
+restaurá-la a partir desse arquivo, para não ficar preso ao formato interno de
+armazenamento e poder recuperar meus dados em caso de perda ou troca de máquina.
+
+**Why this priority**: É uma rede de segurança sobre dados que já existem; não
+bloqueia o uso diário da ferramenta (Stories 1-4), por isso tem a prioridade mais
+baixa, mas é exigida pelo princípio de privacidade/portabilidade de dados do
+projeto.
+
+**Independent Test**: Pode ser testado populando uma coleção, exportando para um
+arquivo, apagando a base local e importando o arquivo de volta, confirmando que
+todos os livros e seus dados retornam idênticos.
+
+**Acceptance Scenarios**:
+
+1. **Given** uma coleção com um ou mais livros, **When** o usuário exporta a
+   coleção, **Then** um arquivo é gerado contendo todos os livros com todos os
+   seus campos.
+2. **Given** um arquivo previamente exportado, **When** o usuário importa esse
+   arquivo em uma base vazia, **Then** todos os livros são restaurados com os
+   mesmos identificadores, status, datas, nota e nota pessoal.
+3. **Given** um arquivo de importação inexistente ou malformado, **When** o
+   usuário tenta importar, **Then** o sistema rejeita a operação com uma mensagem
+   de erro clara, sem alterar a base local existente.
+
+---
+
 ### Edge Cases
 
 - O que acontece se o usuário tentar cadastrar dois livros com título e autor
