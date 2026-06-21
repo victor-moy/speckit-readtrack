@@ -28,9 +28,9 @@ repositório.
 
 **Purpose**: Inicialização do projeto Python
 
-- [ ] T001 Criar estrutura de diretórios `src/readtrack/`, `tests/unit/`, `tests/integration/`, `tests/contract/` conforme `plan.md`
-- [ ] T002 Criar `pyproject.toml` na raiz do repositório: metadados do pacote, entry point `readtrack = readtrack.cli:main`, dependências de runtime vazias, dependências de dev (`pytest`, `ruff`)
-- [ ] T003 [P] Configurar `ruff` (lint + format) em `pyproject.toml`
+- [X] T001 Criar estrutura de diretórios `src/readtrack/`, `tests/unit/`, `tests/integration/`, `tests/contract/` conforme `plan.md`
+- [X] T002 Criar `pyproject.toml` na raiz do repositório: metadados do pacote, entry point `readtrack = readtrack.cli:main`, dependências de runtime vazias, dependências de dev (`pytest`, `ruff`)
+- [X] T003 [P] Configurar `ruff` (lint + format) em `pyproject.toml`
 
 ---
 
@@ -40,10 +40,10 @@ repositório.
 
 **⚠️ CRITICAL**: Nenhuma user story pode começar antes desta fase estar completa
 
-- [ ] T004 Definir enum `ReadingStatus` e dataclass `Book` (campos da entidade, sem regras de negócio ainda) em `src/readtrack/domain.py`
-- [ ] T005 Implementar bootstrap do SQLite (`get_db_path()`, `init_db()`, criação de tabela `books` e índices) em `src/readtrack/storage.py`, conforme esquema em `data-model.md`
-- [ ] T006 [P] Implementar esqueleto da CLI: parser `argparse` top-level com `add_subparsers`, registro vazio de subcomandos, em `src/readtrack/cli.py`, e ponto de entrada em `src/readtrack/__main__.py`
-- [ ] T007 [P] Criar fixture `pytest` de banco SQLite temporário (isolado por teste, via `tmp_path`) em `tests/conftest.py`
+- [X] T004 Definir enum `ReadingStatus` e dataclass `Book` (campos da entidade, sem regras de negócio ainda) em `src/readtrack/domain.py`
+- [X] T005 Implementar bootstrap do SQLite (`get_db_path()`, `init_db()`, criação de tabela `books` e índices) em `src/readtrack/storage.py`, conforme esquema em `data-model.md`
+- [X] T006 [P] Implementar esqueleto da CLI: parser `argparse` top-level com `add_subparsers`, registro vazio de subcomandos, em `src/readtrack/cli.py`, e ponto de entrada em `src/readtrack/__main__.py`
+- [X] T007 [P] Criar fixture `pytest` de banco SQLite temporário (isolado por teste, via `tmp_path`) em `tests/conftest.py`
 
 **Checkpoint**: Fundação pronta — implementação das user stories pode começar
 
@@ -60,15 +60,15 @@ confirmar que o livro cadastrado aparece na listagem com status "quero ler".
 
 > Escrever estes testes PRIMEIRO; garantir que falham antes de implementar.
 
-- [ ] T008 [P] [US1] Contract test para `readtrack add` (sucesso e erro de título/autor vazio) e `readtrack list` (coleção vazia e populada) em `tests/contract/test_cli_contract.py`
-- [ ] T009 [P] [US1] Unit test de validação de criação de `Book` (rejeita título/autor vazio, status inicial "quero ler") em `tests/unit/test_domain.py`
+- [X] T008 [P] [US1] Contract test para `readtrack add` (sucesso e erro de título/autor vazio) e `readtrack list` (coleção vazia e populada) em `tests/contract/test_cli_contract.py`
+- [X] T009 [P] [US1] Unit test de validação de criação de `Book` (rejeita título/autor vazio, status inicial "quero ler") em `tests/unit/test_domain.py`
 
 ### Implementation for User Story 1
 
-- [ ] T010 [US1] Implementar `create_book(title, author) -> Book` com validação (FR-001, FR-002, FR-003) em `src/readtrack/domain.py` (depende de T004; faz T009 passar)
-- [ ] T011 [US1] Implementar `insert_book(book)` e `list_books(status=None)` em `src/readtrack/storage.py` (depende de T005)
-- [ ] T012 [US1] Implementar subcomandos `add` e `list` (sem `--status` ainda) em `src/readtrack/cli.py` (depende de T006, T010, T011; faz T008 passar)
-- [ ] T013 [US1] Adicionar formatação de saída legível e `--json` para `add`/`list` em `src/readtrack/cli.py`
+- [X] T010 [US1] Implementar `create_book(title, author) -> Book` com validação (FR-001, FR-002, FR-003) em `src/readtrack/domain.py` (depende de T004; faz T009 passar)
+- [X] T011 [US1] Implementar `insert_book(book)` e `list_books(status=None)` em `src/readtrack/storage.py` (depende de T005)
+- [X] T012 [US1] Implementar subcomandos `add` e `list` (sem `--status` ainda) em `src/readtrack/cli.py` (depende de T006, T010, T011; faz T008 passar)
+- [X] T013 [US1] Adicionar formatação de saída legível e `--json` para `add`/`list` em `src/readtrack/cli.py`
 
 **Checkpoint**: User Story 1 funcional e testável de forma independente (MVP)
 
@@ -84,14 +84,14 @@ confirmar que `started_at`/`finished_at` foram preenchidos corretamente.
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T014 [P] [US2] Contract test para `readtrack status` (transições válidas + erro de id inexistente) em `tests/contract/test_cli_contract.py`
-- [ ] T015 [P] [US2] Unit test dos efeitos colaterais de transição de status (preenchimento de datas, idempotência) em `tests/unit/test_domain.py`
+- [X] T014 [P] [US2] Contract test para `readtrack status` (transições válidas + erro de id inexistente) em `tests/contract/test_cli_contract.py`
+- [X] T015 [P] [US2] Unit test dos efeitos colaterais de transição de status (preenchimento de datas, idempotência) em `tests/unit/test_domain.py`
 
 ### Implementation for User Story 2
 
-- [ ] T016 [US2] Implementar `update_status(book, new_status)` com preenchimento automático de `started_at`/`finished_at` (FR-005, FR-006) em `src/readtrack/domain.py` (depende de T010; faz T015 passar)
-- [ ] T017 [US2] Implementar `get_book(book_id)` e `update_book(book)` em `src/readtrack/storage.py` (depende de T011)
-- [ ] T018 [US2] Implementar subcomando `status` com erro claro para id inexistente (FR-007) em `src/readtrack/cli.py` (depende de T012, T016, T017; faz T014 passar)
+- [X] T016 [US2] Implementar `update_status(book, new_status)` com preenchimento automático de `started_at`/`finished_at` (FR-005, FR-006) em `src/readtrack/domain.py` (depende de T010; faz T015 passar)
+- [X] T017 [US2] Implementar `get_book(book_id)` e `update_book(book)` em `src/readtrack/storage.py` (depende de T011)
+- [X] T018 [US2] Implementar subcomando `status` com erro claro para id inexistente (FR-007) em `src/readtrack/cli.py` (depende de T012, T016, T017; faz T014 passar)
 
 **Checkpoint**: User Stories 1 e 2 funcionam de forma independente
 
@@ -108,14 +108,14 @@ rejeitado.
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T019 [P] [US3] Contract test para `readtrack rate` (sucesso, nota fora de 1-5, e rejeição quando status != "lido") e `readtrack note` em `tests/contract/test_cli_contract.py`
-- [ ] T020 [P] [US3] Unit test das regras de avaliação (`rating` exige status "lido", intervalo 1-5) em `tests/unit/test_domain.py`
+- [X] T019 [P] [US3] Contract test para `readtrack rate` (sucesso, nota fora de 1-5, e rejeição quando status != "lido") e `readtrack note` em `tests/contract/test_cli_contract.py`
+- [X] T020 [P] [US3] Unit test das regras de avaliação (`rating` exige status "lido", intervalo 1-5) em `tests/unit/test_domain.py`
 
 ### Implementation for User Story 3
 
-- [ ] T021 [US3] Implementar `set_rating(book, rating)` e `set_notes(book, notes)` com validação (FR-008, FR-009) em `src/readtrack/domain.py` (depende de T016; faz T020 passar)
-- [ ] T022 [US3] Estender `update_book()` para persistir `rating`/`notes` em `src/readtrack/storage.py` (depende de T017)
-- [ ] T023 [US3] Implementar subcomandos `rate` e `note` em `src/readtrack/cli.py` (depende de T018, T021, T022; faz T019 passar)
+- [X] T021 [US3] Implementar `set_rating(book, rating)` e `set_notes(book, notes)` com validação (FR-008, FR-009) em `src/readtrack/domain.py` (depende de T016; faz T020 passar)
+- [X] T022 [US3] Estender `update_book()` para persistir `rating`/`notes` em `src/readtrack/storage.py` (depende de T017)
+- [X] T023 [US3] Implementar subcomandos `rate` e `note` em `src/readtrack/cli.py` (depende de T018, T021, T022; faz T019 passar)
 
 **Checkpoint**: User Stories 1, 2 e 3 funcionam de forma independente
 
@@ -131,14 +131,14 @@ validar `search`, `list --status` e `stats` isoladamente.
 
 ### Tests for User Story 4 ⚠️
 
-- [ ] T024 [P] [US4] Contract test para `readtrack search`, `readtrack list --status` e `readtrack stats` (incluindo caso "sem avaliações") em `tests/contract/test_cli_contract.py`
-- [ ] T025 [P] [US4] Unit test do cálculo de estatísticas (total lido, lido no ano corrente, média, divisão por zero) em `tests/unit/test_stats.py`
+- [X] T024 [P] [US4] Contract test para `readtrack search`, `readtrack list --status` e `readtrack stats` (incluindo caso "sem avaliações") em `tests/contract/test_cli_contract.py`
+- [X] T025 [P] [US4] Unit test do cálculo de estatísticas (total lido, lido no ano corrente, média, divisão por zero) em `tests/unit/test_stats.py`
 
 ### Implementation for User Story 4
 
-- [ ] T026 [US4] Implementar `search_books(term)` e suporte a filtro por `status` em `list_books()` (FR-010, FR-011) em `src/readtrack/storage.py` (depende de T011)
-- [ ] T027 [US4] Implementar `compute_stats(books)` (total lido, lido no ano, média ou "sem avaliações") (FR-012) em `src/readtrack/stats.py` (depende de T011; faz T025 passar)
-- [ ] T028 [US4] Implementar subcomando `search`, flag `--status` em `list`, e subcomando `stats` em `src/readtrack/cli.py` (depende de T012, T026, T027; faz T024 passar)
+- [X] T026 [US4] Implementar `search_books(term)` e suporte a filtro por `status` em `list_books()` (FR-010, FR-011) em `src/readtrack/storage.py` (depende de T011)
+- [X] T027 [US4] Implementar `compute_stats(books)` (total lido, lido no ano, média ou "sem avaliações") (FR-012) em `src/readtrack/stats.py` (depende de T011; faz T025 passar)
+- [X] T028 [US4] Implementar subcomando `search`, flag `--status` em `list`, e subcomando `stats` em `src/readtrack/cli.py` (depende de T012, T026, T027; faz T024 passar)
 
 **Checkpoint**: Todas as 4 user stories centrais funcionam de forma independente
 
@@ -154,14 +154,14 @@ importar o arquivo de volta, e confirmar que a coleção é idêntica.
 
 ### Tests for User Story 5 ⚠️
 
-- [ ] T029 [P] [US5] Contract test para `readtrack export` e `readtrack import` (round-trip e erro de arquivo inexistente/malformado) em `tests/contract/test_cli_contract.py`
-- [ ] T030 [P] [US5] Integration test de round-trip export→import preservando todos os campos em `tests/integration/test_storage_roundtrip.py`
+- [X] T029 [P] [US5] Contract test para `readtrack export` e `readtrack import` (round-trip e erro de arquivo inexistente/malformado) em `tests/contract/test_cli_contract.py`
+- [X] T030 [P] [US5] Integration test de round-trip export→import preservando todos os campos em `tests/integration/test_storage_roundtrip.py`
 
 ### Implementation for User Story 5
 
-- [ ] T031 [US5] Implementar `export_books(path)` (serialização JSON de todos os livros) (FR-016) em `src/readtrack/storage.py` (depende de T011; faz parte de T030 passar)
-- [ ] T032 [US5] Implementar `import_books(path)` (upsert por `id`, validação de JSON) (FR-017) em `src/readtrack/storage.py` (depende de T031; faz T030 passar)
-- [ ] T033 [US5] Implementar subcomandos `export` e `import` com tratamento de erro de arquivo ausente/malformado em `src/readtrack/cli.py` (depende de T012, T031, T032; faz T029 passar)
+- [X] T031 [US5] Implementar `export_books(path)` (serialização JSON de todos os livros) (FR-016) em `src/readtrack/storage.py` (depende de T011; faz parte de T030 passar)
+- [X] T032 [US5] Implementar `import_books(path)` (upsert por `id`, validação de JSON) (FR-017) em `src/readtrack/storage.py` (depende de T031; faz T030 passar)
+- [X] T033 [US5] Implementar subcomandos `export` e `import` com tratamento de erro de arquivo ausente/malformado em `src/readtrack/cli.py` (depende de T012, T031, T032; faz T029 passar)
 
 **Checkpoint**: Todas as 5 user stories funcionam de forma independente
 
@@ -171,11 +171,11 @@ importar o arquivo de volta, e confirmar que a coleção é idêntica.
 
 **Purpose**: Validação final e qualidade transversal
 
-- [ ] T034 [P] Adicionar `README.md` na raiz com instruções de instalação (`pip install -e .`) e uso de todos os subcomandos
-- [ ] T035 Revisar mensagens de erro de todos os subcomandos para consistência (Princípio III da constituição)
-- [ ] T036 [P] Medir tempo de resposta de `list`/`search`/`stats` com 10.000 livros sintéticos e confirmar SC-003 (<200ms)
-- [ ] T037 Executar manualmente todos os cenários de `quickstart.md` e confirmar os resultados esperados
-- [ ] T038 Rodar `ruff check` e `ruff format --check` em todo o projeto e corrigir achados
+- [X] T034 [P] Adicionar `README.md` na raiz com instruções de instalação (`pip install -e .`) e uso de todos os subcomandos
+- [X] T035 Revisar mensagens de erro de todos os subcomandos para consistência (Princípio III da constituição)
+- [X] T036 [P] Medir tempo de resposta de `list`/`search`/`stats` com 10.000 livros sintéticos e confirmar SC-003 (<200ms)
+- [X] T037 Executar manualmente todos os cenários de `quickstart.md` e confirmar os resultados esperados
+- [X] T038 Rodar `ruff check` e `ruff format --check` em todo o projeto e corrigir achados
 
 ---
 
