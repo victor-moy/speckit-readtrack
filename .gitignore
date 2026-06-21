@@ -1,0 +1,13 @@
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Data
+*.db
+*.sqlite3
